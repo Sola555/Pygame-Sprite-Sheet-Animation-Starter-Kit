@@ -2,6 +2,7 @@
 import pygame, sys
 from SpriteLoader import *
 from pygame.locals import *
+from Cat import *
 pygame.init()
 screen_info = pygame.display.Info()
 size_x = 800
@@ -31,26 +32,32 @@ def get_images():
 
 
 
-
+#main funcions
 def main():
     #get images
     get_images()
+    cat = Cat((-90, random.randint(50, height-50)), cat_images)
     cat_image = cat_images[0]
     cat_rect = cat_image.get_rect()
 
-    #frame rate
-    frame = pygame.time.get_ticks() // 60 % 8
-    cat_image = cat_images[frame]
-    screen.fill(color)
-    screen.blit(cat_image, cat_rect)
-    pygame.display.flip()
+    
 
     #exit screen
     while True:
+
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == QUIT:
                 sys.exit
+
+        #frame rate
+        cat.update('self')
+        cat.draw(screen)
+        screen.fill(color)
+        
+        pygame.display.flip()
+
+    
 
     
 
