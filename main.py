@@ -1,9 +1,60 @@
-import pygame
+#Setup starts
+import pygame, sys
+from SpriteLoader import *
+from pygame.locals import *
+pygame.init()
+screen_info = pygame.display.Info()
+size_x = 800
+size_y = 600
+screen = pygame.display.set_mode((size_x, size_y))
 
-#sprite sheet class
-class Spritesheet:
-    def __init__(self, img_path):
-        self.sprite_sheet = pygame.image.load(img_path)
-    def get_image(self, x, y, width, height):
-        image = pygame.Surface([width, height])
-        image.blit(self.sprite_sheet, (0, 0), (x, y, width, height))
+size = (width, height) = (screen_info.current_w, screen_info.current_h)
+
+clock = pygame.time.Clock()
+color = (230, 220, 190)
+#SEtup end
+
+#images
+cat_images = []
+
+
+#cat images:
+def get_images():
+    cat_sheet = Spritesheet('runningcat.png')
+    for  i in range(4):
+        for j in range(2):
+            cat_images.append(cat_sheet.get_image(j * 512, i * 256, 512, 256))
+            cat_images[-1] = pygame.transform.smoothscale(cat_images[-1], (180, 90))
+
+
+
+
+
+
+
+def main():
+    #get images
+    get_images()
+    cat_image = cat_images[0]
+    cat_rect = cat_image.get_rect()
+
+    #frame rate
+    frame = pygame.time.get_ticks() // 60 % 8
+    cat_image = cat_images[frame]
+    screen.fill(color)
+    screen.blit(cat_image, cat_rect)
+    pygame.display.flip()
+
+    #exit screen
+    while True:
+        clock.tick(60)
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                sys.exit
+
+    
+
+
+
+if __name__ == "__main__":
+    main()
