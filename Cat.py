@@ -5,7 +5,7 @@ class Cat(pygame.sprite.Sprite):
         super().__init__()
         self.images = images
         self.image = images[0]
-        self.rect = self.images.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.center = pos 
         self.speed = [8, 0]
         
