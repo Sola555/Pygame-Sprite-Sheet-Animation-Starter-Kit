@@ -1,5 +1,7 @@
 #Setup starts
-import pygame, sys
+import pygame, sys, turtle
+
+from pygame.sprite import collide_rect
 from SpriteLoader import *
 from pygame.locals import *
 from Cat import *
@@ -16,7 +18,7 @@ size = (width, height) = (screen_info.current_w, screen_info.current_h)
 screen = pygame.display.set_mode(size)
 
 clock = pygame.time.Clock()
-color = (230, 220, 190)
+color = (169,169,169)
 #SEtup end
 
 #images
@@ -71,10 +73,14 @@ def main():
         cat.draw(screen)
         player.draw(screen)
         pygame.display.flip()
+        
+        if cat.rect.colliderect(player.rect):
+            print("You lost")
+            break
+            
+            
 
-    
 
-    
 
 
 
